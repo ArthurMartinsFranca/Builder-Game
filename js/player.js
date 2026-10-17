@@ -1,6 +1,39 @@
 let canvas = document.querySelector("#canvas");
 let ctx = canvas.getContext("2d");
 
+const TAMANHObLOCO = 100;
+
+const MAPA = [
+[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+[0,1,1,1,1,0,0,0,0,1,0,0,0,0,1,0,1],
+[1,1,0,1,1,1,1,0,1,1,1,1,1,1,1,1],
+[0,1,1,1,1,0,0,0,0,1,0,0,0,0,1,0,1],
+[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+[0,1,1,1,1,0,0,0,0,1,0,0,0,0,1,0,1],
+[1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1],
+[0,1,1,1,1,0,0,0,0,1,0,0,0,0,1,0,1],
+[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+[0,1,1,1,1,0,0,0,0,1,0,0,0,0,1,0,1],
+[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+[0,1,1,1,1,0,0,0,0,1,0,0,0,0,1,0,1],
+[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+[0,1,1,1,1,0,0,0,0,1,0,0,0,0,1,0,1],
+[1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1],
+[0,1,1,1,1,0,0,0,0,1,0,0,0,0,1,0,1],
+[1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1],
+[0,1,1,1,1,0,0,0,0,1,0,0,0,0,1,0,1],
+[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+[0,1,1,1,1,0,0,0,0,1,0,0,0,0,1,0,1],
+]
+
+let esquerda = 0;
+
+let direita = 0;
+
+let baixo = 0;
+
+let alto = 0;
+
 const player = {
     x: 100,
     y: 100,
@@ -35,36 +68,105 @@ window.addEventListener("keyup", function(e) {
 });
 
 function update() {
-    if (teclas.w == true) {
-        player.y -= player.velocidade;
 
-    }
+    let bordaAlta = Math.floor((player.y) / TAMANHObLOCO);
+
+    let colunaBordaEsquerda = Math.floor((player.x)  / TAMANHObLOCO);
+
+    let colunaBordaDireita = Math.floor((player.x + player.width - 1) / TAMANHObLOCO);
+
+    let bordaBaixa = Math.floor((player.y + player.height -1) / TAMANHObLOCO);
+    
     if(teclas.a == true) {
         player.x -= player.velocidade;
+
+        bordaAlta = Math.floor((player.y) / TAMANHObLOCO);
+        
+        bordaBaixa = Math.floor((player.y + player.height -1) / TAMANHObLOCO);
+
+        colunaBordaEsquerda = Math.floor((player.x) / TAMANHObLOCO);
+
+        if(MAPA[bordaAlta][colunaBordaEsquerda] === 0  || MAPA[bordaBaixa][colunaBordaEsquerda] === 0){
+
+            player.x = (colunaBordaEsquerda * TAMANHObLOCO) + TAMANHObLOCO;
+        }
+
+        
+
     }
+
     if(teclas.d == true) {
         player.x += player.velocidade;
-    }
-    if (teclas.s == true) {
 
-        player.y += player.velocidade;
+        bordaAlta = Math.floor((player.y) / TAMANHObLOCO);
+        
+        bordaBaixa = Math.floor((player.y + player.height -1 ) / TAMANHObLOCO);
+
+        colunaBordaDireita = Math.floor((player.x + player.width - 1 )  / TAMANHObLOCO);
+
+        if(MAPA[bordaAlta][colunaBordaDireita] === 0 || MAPA[bordaBaixa][colunaBordaDireita] === 0){
+
+            player.x = (colunaBordaDireita * TAMANHObLOCO) - player.width;
+        }
+
     }
 
     if (player.x < 0) {
         player.x = 0;
     }
 
-    if (player.y < 0) {
-        player.y = 0;
-    }
-
     if (player.x + player.width > canvas.width) {
         player.x = canvas.width - player.width;
     }
 
+    if (teclas.w == true) {
+
+        player.y -= player.velocidade;
+    }
+
+    if (teclas.s == true) {
+
+        player.y += player.velocidade;
+    }
+
+    if (player.y < 0) {
+        player.y = 0;
+    }
+
+
     if (player.y + player.height > canvas.height) {
         player.y = canvas.height - player.height;
     }
+
+    if (teclas.w == true) {
+
+        bordaAlta = Math.floor((player.y) / TAMANHObLOCO);
+
+        colunaBordaEsquerda = Math.floor((player.x)  / TAMANHObLOCO);
+
+        colunaBordaDireita = Math.floor((player.x + player.width - 1) / TAMANHObLOCO);
+
+        if(MAPA[bordaAlta][colunaBordaDireita] === 0 || MAPA[bordaAlta][colunaBordaEsquerda] === 0){
+
+            player.y = (bordaAlta * TAMANHObLOCO) + TAMANHObLOCO;
+        }
+    }
+
+    if (teclas.s == true) {
+
+        bordaBaixa = Math.floor((player.y + player.height -1) / TAMANHObLOCO);
+
+        colunaBordaEsquerda = Math.floor(player.x / TAMANHObLOCO);
+
+        colunaBordaDireita = Math.floor((player.x + player.width -1 ) / TAMANHObLOCO);
+        
+        if(MAPA[bordaBaixa][colunaBordaDireita] === 0 || MAPA[bordaBaixa][colunaBordaEsquerda] === 0){
+
+            player.y = (bordaBaixa * TAMANHObLOCO) - player.height;
+        }   
+
+    }
+
 
     const centroX = player.x + player.width / 2;
     const centroY = player.y + player.height / 2;
@@ -83,7 +185,29 @@ window.addEventListener("mousemove", function(e) {
 })
 
 function draw() {
+
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    for(let i = 0; i < MAPA.length; i++){
+        for(let j = 0; j < MAPA[i].length; j++){
+
+            let blocoX = j * TAMANHObLOCO;
+
+            let blocoY = i * TAMANHObLOCO;
+
+            if(MAPA[i][j] === 1){
+                
+                ctx.fillStyle = "#228B22";
+
+            }
+
+            else
+                ctx.fillStyle = "#555";
+
+            ctx.fillRect(blocoX, blocoY, TAMANHObLOCO, TAMANHObLOCO);
+        }
+    }    
+
 
     ctx.save();
 
@@ -102,7 +226,7 @@ function draw() {
         player.height
     );
 
-    ctx.restore()
+    ctx.restore();
 }
 
 function loop() {
@@ -114,4 +238,5 @@ function loop() {
 }
 
 loop();
+
 
