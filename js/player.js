@@ -1,38 +1,11 @@
+import {
+    desenharMapa,
+    MAPA,
+    TAMANHObLOCO
+} from "./game.js";
+
 let canvas = document.querySelector("#canvas");
 let ctx = canvas.getContext("2d");
-
-const TAMANHObLOCO = 100;
-
-const MAPA = [
-[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-[0,1,1,1,1,0,0,0,0,1,0,0,0,0,1,0,1],
-[1,1,0,1,1,1,1,0,1,1,1,1,1,1,1,1],
-[0,1,1,1,1,0,0,0,0,1,0,0,0,0,1,0,1],
-[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-[0,1,1,1,1,0,0,0,0,1,0,0,0,0,1,0,1],
-[1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1],
-[0,1,1,1,1,0,0,0,0,1,0,0,0,0,1,0,1],
-[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-[0,1,1,1,1,0,0,0,0,1,0,0,0,0,1,0,1],
-[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-[0,1,1,1,1,0,0,0,0,1,0,0,0,0,1,0,1],
-[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-[0,1,1,1,1,0,0,0,0,1,0,0,0,0,1,0,1],
-[1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1],
-[0,1,1,1,1,0,0,0,0,1,0,0,0,0,1,0,1],
-[1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1],
-[0,1,1,1,1,0,0,0,0,1,0,0,0,0,1,0,1],
-[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-[0,1,1,1,1,0,0,0,0,1,0,0,0,0,1,0,1],
-]
-
-let esquerda = 0;
-
-let direita = 0;
-
-let baixo = 0;
-
-let alto = 0;
 
 const player = {
     x: 100,
@@ -79,8 +52,6 @@ function update() {
     
     if(teclas.a == true) {
         player.x -= player.velocidade;
-
-        bordaAlta = Math.floor((player.y) / TAMANHObLOCO);
         
         bordaBaixa = Math.floor((player.y + player.height -1) / TAMANHObLOCO);
 
@@ -188,26 +159,7 @@ function draw() {
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    for(let i = 0; i < MAPA.length; i++){
-        for(let j = 0; j < MAPA[i].length; j++){
-
-            let blocoX = j * TAMANHObLOCO;
-
-            let blocoY = i * TAMANHObLOCO;
-
-            if(MAPA[i][j] === 1){
-                
-                ctx.fillStyle = "#228B22";
-
-            }
-
-            else
-                ctx.fillStyle = "#555";
-
-            ctx.fillRect(blocoX, blocoY, TAMANHObLOCO, TAMANHObLOCO);
-        }
-    }    
-
+    desenharMapa(ctx);
 
     ctx.save();
 
