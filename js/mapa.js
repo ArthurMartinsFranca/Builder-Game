@@ -1,4 +1,4 @@
-export const TAMANHObLOCO = 80;
+export const TAMANHObLOCO = 100;
 export const spriteGrama = new Image();
 spriteGrama.src = "./sprites/grama.png";
 
