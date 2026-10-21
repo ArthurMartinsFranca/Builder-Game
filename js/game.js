@@ -12,6 +12,9 @@ import {
 let canvas = document.querySelector("#canvas");
 let ctx = canvas.getContext("2d");
 
+const spritePlayer = new Image();
+spritePlayer.src = "./sprites/player.png";
+
 function redimensionarCanvas() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
@@ -24,8 +27,8 @@ window.addEventListener("resize", redimensionarCanvas);
 const player = {
     x: 2000,
     y: 2000,
-    width: 40,
-    height: 40,
+    width: 50,
+    height: 50,
     vida: 100,
     velocidade: 4,
     angulo: 0,
@@ -78,7 +81,8 @@ function update() {
 
         colunaBordaEsquerda = Math.floor((player.x) / TAMANHObLOCO);
 
-        if(MAPA[bordaAlta][colunaBordaEsquerda] === 0  || MAPA[bordaBaixa][colunaBordaEsquerda] === 0){
+        if(MAPA[bordaAlta][colunaBordaEsquerda] === 0  || MAPA[bordaBaixa][colunaBordaEsquerda] === 0 ||
+            MAPA[bordaAlta][colunaBordaEsquerda] === 2  || MAPA[bordaBaixa][colunaBordaEsquerda] === 2){
 
             player.x = (colunaBordaEsquerda * TAMANHObLOCO) + TAMANHObLOCO;
         }
@@ -94,7 +98,8 @@ function update() {
 
         colunaBordaDireita = Math.floor((player.x + player.width - 1 )  / TAMANHObLOCO);
 
-        if(MAPA[bordaAlta][colunaBordaDireita] === 0 || MAPA[bordaBaixa][colunaBordaDireita] === 0){
+        if(MAPA[bordaAlta][colunaBordaDireita] === 0 || MAPA[bordaBaixa][colunaBordaDireita] === 0 ||
+            MAPA[bordaAlta][colunaBordaDireita] === 2 || MAPA[bordaBaixa][colunaBordaDireita] === 2){
 
             player.x = (colunaBordaDireita * TAMANHObLOCO) - player.width;
         }
@@ -127,8 +132,6 @@ function update() {
         player.y = 0;
     }
 
-
-
     if (teclas.w == true) {
 
         bordaAlta = Math.floor((player.y) / TAMANHObLOCO);
@@ -137,7 +140,8 @@ function update() {
 
         colunaBordaDireita = Math.floor((player.x + player.width - 1) / TAMANHObLOCO);
 
-        if(MAPA[bordaAlta][colunaBordaDireita] === 0 || MAPA[bordaAlta][colunaBordaEsquerda] === 0){
+        if(MAPA[bordaAlta][colunaBordaDireita] === 0 || MAPA[bordaAlta][colunaBordaEsquerda] === 0 || 
+            MAPA[bordaAlta][colunaBordaDireita] === 2 || MAPA[bordaAlta][colunaBordaEsquerda] === 2){
 
             player.y = (bordaAlta * TAMANHObLOCO) + TAMANHObLOCO;
         }
@@ -151,7 +155,8 @@ function update() {
 
         colunaBordaDireita = Math.floor((player.x + player.width -1 ) / TAMANHObLOCO);
         
-        if(MAPA[bordaBaixa][colunaBordaDireita] === 0 || MAPA[bordaBaixa][colunaBordaEsquerda] === 0){
+        if(MAPA[bordaBaixa][colunaBordaDireita] === 0 || MAPA[bordaBaixa][colunaBordaEsquerda] === 0 || 
+            MAPA[bordaBaixa][colunaBordaDireita] === 2 || MAPA[bordaBaixa][colunaBordaEsquerda] === 2){
 
             player.y = (bordaBaixa * TAMANHObLOCO) - player.height;
         }   
@@ -192,7 +197,8 @@ function draw() {
 
     ctx.fillStyle = player.cor;
 
-    ctx.fillRect(
+    ctx.drawImage(
+        spritePlayer,
         -player.width / 2,
         -player.height / 2,
         player.width,
