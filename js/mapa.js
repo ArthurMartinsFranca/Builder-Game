@@ -1,4 +1,20 @@
 export const TAMANHObLOCO = 80;
+export const spriteGrama = new Image();
+spriteGrama.src = "./sprites/grama.png";
+
+spriteGrama.onload = () => {
+    console.log("Grama carregada!");
+};
+
+spriteGrama.onerror = () => {
+    console.error("Erro ao carregar grama.png");
+};
+
+export const spritePedra = new Image();
+spritePedra.src = "./sprites/pedra.png";
+
+export const spriteArvore = new Image();
+spriteArvore.src = "./sprites/arvore.png";
 
 export const MAPA = [
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
@@ -53,30 +69,34 @@ export const MAPA = [
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 ]
 
+
 export function desenharMapa(ctx) {
     for (let i = 0; i < MAPA.length; i++) {
         for (let j = 0; j < MAPA[i].length; j++) {
             const blocoX = j * TAMANHObLOCO;
             const blocoY = i * TAMANHObLOCO;
 
-            if (ctx.fillStyle = MAPA[i][j] === 1) {
-                ctx.fillStyle = "#228B22" 
-            }
-            if(ctx.fillStyle = MAPA[i][j] === 2) {
-                ctx.fillStyle = "#32CD32";
-            }
-            if(ctx.fillStyle = MAPA[i][j] === 0) {
-                ctx.fillStyle = "#555"
-            }
-               
+            let sprite;
 
-            ctx.fillRect(
-                blocoX,
-                blocoY,
-                TAMANHObLOCO,
-                TAMANHObLOCO
-            );
+            if (MAPA[i][j] === 0) {
+                sprite = spritePedra;
+            } else if (MAPA[i][j] === 1) {
+                sprite = spriteGrama;
+            } else if (MAPA[i][j] === 2) {
+                sprite = spriteArvore;
+            }
+
+            if (sprite && sprite.complete && sprite.naturalWidth > 0) {
+                ctx.drawImage(
+                    sprite,
+                    blocoX,
+                    blocoY,
+                    TAMANHObLOCO,
+                    TAMANHObLOCO
+                );
+            }
         }
     }
 }
+
 
