@@ -2,10 +2,24 @@ import {
     desenharMapa,
     MAPA,
     TAMANHObLOCO
-} from "./game.js";
+} from "./mapa.js";
+
+import { 
+    camera, 
+    atualizarCamera 
+} from "./camera.js";
 
 let canvas = document.querySelector("#canvas");
 let ctx = canvas.getContext("2d");
+
+function redimensionarCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
+
+redimensionarCanvas();
+
+window.addEventListener("resize", redimensionarCanvas);
 
 const player = {
     x: 100,
@@ -40,6 +54,13 @@ window.addEventListener("keyup", function(e) {
         teclas[e.key] = false;
 });
 
+window.addEventListener("mousemove", function(e) {
+    const rect = canvas.getBoundingClientRect();
+    
+    mouse.x = e.clientX - rect.left;
+    mouse.y = e.clientY - rect.top
+})
+
 function update() {
 
     let bordaAlta = Math.floor((player.y) / TAMANHObLOCO);
@@ -61,8 +82,6 @@ function update() {
 
             player.x = (colunaBordaEsquerda * TAMANHObLOCO) + TAMANHObLOCO;
         }
-
-        
 
     }
 
@@ -86,8 +105,12 @@ function update() {
         player.x = 0;
     }
 
-    if (player.x + player.width > canvas.width) {
-        player.x = canvas.width - player.width;
+    if (player.x + player.width > MAPA[0].length * TAMANHObLOCO) {
+        player.x = MAPA[0].length * TAMANHObLOCO - player.width;
+    }
+
+    if (player.y + player.height > MAPA.length * TAMANHObLOCO - 2) {
+        player.y = MAPA.length * TAMANHObLOCO - player.height - 4;
     }
 
     if (teclas.w == true) {
@@ -105,9 +128,6 @@ function update() {
     }
 
 
-    if (player.y + player.height > canvas.height) {
-        player.y = canvas.height - player.height;
-    }
 
     if (teclas.w == true) {
 
@@ -138,26 +158,27 @@ function update() {
 
     }
 
-
     const centroX = player.x + player.width / 2;
     const centroY = player.y + player.height / 2;
 
-    const diferencaX = mouse.x - centroX;
-    const diferencaY = mouse.y - centroY;
+    const mouseMundoX = mouse.x + camera.x;
+    const mouseMundoY = mouse.y + camera.y;
+
+    const diferencaX = mouseMundoX - centroX;
+    const diferencaY = mouseMundoY - centroY;
 
     player.angulo = Math.atan2(diferencaY, diferencaX);
-}
 
-window.addEventListener("mousemove", function(e) {
-    const rect = canvas.getBoundingClientRect();
-    
-    mouse.x = e.clientX - rect.left;
-    mouse.y = e.clientY - rect.top
-})
+    atualizarCamera(player, canvas);
+}
 
 function draw() {
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    ctx.save();
+
+    ctx.translate(-camera.x, -camera.y);
 
     desenharMapa(ctx);
 
@@ -178,6 +199,7 @@ function draw() {
         player.height
     );
 
+    ctx.restore();
     ctx.restore();
 }
 
