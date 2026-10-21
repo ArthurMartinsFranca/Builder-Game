@@ -27,8 +27,8 @@ window.addEventListener("resize", redimensionarCanvas);
 const player = {
     x: 2000,
     y: 2000,
-    width: 50,
-    height: 50,
+    width: 70,
+    height: 70,
     vida: 100,
     velocidade: 4,
     angulo: 0,
