@@ -30,7 +30,7 @@ const player = {
     width: 70,
     height: 70,
     vida: 100,
-    velocidade: 4,
+    velocidade: 3,
     angulo: 0,
     cor: 'brown'
 }
