@@ -2,14 +2,6 @@ export const TAMANHObLOCO = 100;
 export const spriteGrama = new Image();
 spriteGrama.src = "./sprites/grama.png";
 
-spriteGrama.onload = () => {
-    console.log("Grama carregada!");
-};
-
-spriteGrama.onerror = () => {
-    console.error("Erro ao carregar grama.png");
-};
-
 export const spritePedra = new Image();
 spritePedra.src = "./sprites/pedra.png";
 
