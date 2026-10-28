@@ -1,12 +1,29 @@
-export const TAMANHObLOCO = 150;
-export const spriteGrama = new Image();
+export const TAMANHObLOCO = 100;
+
+export const spriteGrama =  new Image();
 spriteGrama.src = "./sprites/grama.png";
 
-export const spritePedra = new Image();
-spritePedra.src = "./sprites/pedra.png";
+spriteGrama.onload = () => {
+    console.log("Grama carregada!");
+};
 
-export const spriteArvore = new Image();
-spriteArvore.src = "./sprites/arvore.png";
+spriteGrama.onerror = () => {
+    console.error("Erro ao carregar grama.png");
+};
+
+export const pedra = { 
+    spritePedra: new Image(),
+    vida: 10
+};
+
+pedra.spritePedra.src = "./sprites/pedra.png";
+
+export const arvore = {
+    spriteArvore: new Image(),
+    vida: 5 
+};
+
+arvore.spriteArvore.src = "./sprites/arvore.png";
 
 export const MAPA = [
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
@@ -71,11 +88,11 @@ export function desenharMapa(ctx) {
             let sprite;
 
             if (MAPA[i][j] === 0) {
-                sprite = spritePedra;
+                sprite = pedra.spritePedra;
             } else if (MAPA[i][j] === 1) {
                 sprite = spriteGrama;
             } else if (MAPA[i][j] === 2) {
-                sprite = spriteArvore;
+                sprite = arvore.spriteArvore;
             }
 
             if (sprite && sprite.complete && sprite.naturalWidth > 0) {
@@ -90,5 +107,7 @@ export function desenharMapa(ctx) {
         }
     }
 }
+
+
 
 
