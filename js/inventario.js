@@ -22,10 +22,9 @@ export function quebrar(){
     
             let bordaBaixa = Math.floor((player.y + player.height -1) / TAMANHObLOCO);
 
-
             if(MAPA[bordaAlta][colunaBordaEsquerda] === 0 || MAPA[bordaAlta+1][colunaBordaEsquerda] === 0 || MAPA[bordaAlta][colunaBordaDireita] === 0 || MAPA[bordaAlta+1][colunaBordaDireita] === 0 ){
             
-                pedra.vida--;
+                slotsEl.backgroundImage = pedra.spritePedra;
                 
             }
 
@@ -48,5 +47,7 @@ for(let i = 0; i < 5; i++){
     });
 
 }
+
+
 
 
