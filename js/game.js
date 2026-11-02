@@ -146,6 +146,10 @@ function update() {
     player.angulo = Math.atan2(diferencaY, diferencaX);
 
     atualizarCamera(player, canvas);
+
+    construcao.previa.x = Math.floor(mouseMundoX / construcao.previa.width) * construcao.previa.width;
+
+    construcao.previa.y = Math.floor(mouseMundoY / construcao.previa.width) * construcao.previa.width;
 }
 
 function loop() {
