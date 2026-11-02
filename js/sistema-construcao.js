@@ -3,6 +3,10 @@ import {
     TAMANHObLOCO
 }from "./mapa.js"
 
+import {
+    player
+}from "./player.js"
+
 let slots = document.querySelectorAll(".slot");
 let remover = false;
 
@@ -89,6 +93,20 @@ window.addEventListener("click", function(event) {
     };
     
     if (!podeConstruir(bloco)) return;
+    if (!podeConstruirSemPlayer(bloco)) return;
     
     construcao.construidos.push(bloco);
 });
+
+function podeConstruirSemPlayer(bloco) {
+    if (
+        player.x < bloco.x + bloco.width &&
+        player.x + player.width > bloco.x &&
+        player.y < bloco.y + bloco.height &&
+        player.y + player.height > bloco.y
+    ) {
+        return false;
+    }
+
+    return true;
+}
