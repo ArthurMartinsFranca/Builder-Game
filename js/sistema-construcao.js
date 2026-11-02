@@ -1,8 +1,10 @@
 import {
-    mouse
-}from "./input.js"
+    MAPA,
+    TAMANHObLOCO
+}from "./mapa.js"
 
 let slots = document.querySelectorAll(".slot");
+let remover = false;
 
 export let construcao = {
     previa: {
@@ -16,7 +18,28 @@ export let construcao = {
     construidos: [],
 };
 
-let remover = false;
+function podeConstruir(bloco) {
+    let colunaInicial = Math.floor(bloco.x / TAMANHObLOCO);
+    let colunaFinal = Math.ceil((bloco.x + bloco.width) / TAMANHObLOCO) - 1;
+
+    let linhaInicial = Math.floor(bloco.y / TAMANHObLOCO);
+    let linhaFinal = Math.ceil((bloco.y + bloco.height) / TAMANHObLOCO) - 1;
+
+    for (let i = linhaInicial; i <= linhaFinal; i++) {
+        for (let j = colunaInicial; j <= colunaFinal; j++) {
+
+            if (!MAPA[i] || MAPA[i][j] === undefined) {
+                return false;
+            }
+
+            if (MAPA[i][j] === 0 || MAPA[i][j] === 2) {
+                return false;
+            }
+        }
+    }
+
+    return true;
+}
 
 slots.forEach(function(slot, i) {
     slot.addEventListener("click", function() {
@@ -38,7 +61,6 @@ document.querySelector("#remover").addEventListener("click", function() {
 window.addEventListener("click", function(event) {
     if (event.target !== document.querySelector("#canvas")) return;
 
-
     if (remover) {
         for (let i = 0; i < construcao.construidos.length; i++) {
             let bloco = construcao.construidos[i];
@@ -58,11 +80,15 @@ window.addEventListener("click", function(event) {
 
     if (construcao.previa.tipo === null) return;
 
-    construcao.construidos.push({
+    let bloco = {
         x: construcao.previa.x,
         y: construcao.previa.y,
         width: 80,
         height: 80,
         tipo: construcao.previa.tipo
-    });
+    };
+    
+    if (!podeConstruir(bloco)) return;
+    
+    construcao.construidos.push(bloco);
 });
