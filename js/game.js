@@ -44,6 +44,8 @@ function update() {
     let colunaBordaDireita = Math.floor((player.x + player.width - 1) / TAMANHObLOCO);
 
     let bordaBaixa = Math.floor((player.y + player.height -1) / TAMANHObLOCO);
+
+    let xAnterior = player.x;
     
     if(teclas.a == true) {
         player.x -= player.velocidade;
@@ -75,6 +77,13 @@ function update() {
             player.x = (colunaBordaDireita * TAMANHObLOCO) - player.width;
         }
 
+
+    }
+    if (
+        (teclas.a || teclas.d) &&
+        colidiuComConstrucao(player.x, player.y)
+    ) {
+        player.x = xAnterior;
     }
 
     if (player.x < 0) {
@@ -89,6 +98,8 @@ function update() {
         player.y = MAPA.length * TAMANHObLOCO - player.height - 4;
     }
 
+    let yAnterior = player.y;
+
     if (teclas.w == true) {
 
         player.y -= player.velocidade;
@@ -102,6 +113,8 @@ function update() {
     if (player.y < 0) {
         player.y = 0;
     }
+
+    
 
     if (teclas.w == true) {
 
@@ -133,6 +146,14 @@ function update() {
         }   
 
     }
+    
+
+    if (
+        (teclas.w || teclas.s) &&
+        colidiuComConstrucao(player.x, player.y)
+    ) {
+        player.y = yAnterior;
+    }
 
     const centroX = player.x + player.width / 2;
     const centroY = player.y + player.height / 2;
@@ -150,6 +171,21 @@ function update() {
     construcao.previa.x = Math.floor(mouseMundoX / construcao.previa.width) * construcao.previa.width;
 
     construcao.previa.y = Math.floor(mouseMundoY / construcao.previa.width) * construcao.previa.width;
+}
+
+function colidiuComConstrucao(x, y) {
+    for (let bloco of construcao.construidos) {
+        if (
+            x < bloco.x + bloco.width &&
+            x + player.width > bloco.x &&
+            y < bloco.y + bloco.height &&
+            y + player.height > bloco.y
+        ) {
+            return true;
+        }
+    }
+
+    return false;
 }
 
 function loop() {
