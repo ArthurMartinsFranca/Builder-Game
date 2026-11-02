@@ -1,7 +1,7 @@
 export let canvas = document.querySelector("#canvas");
 export let ctx = canvas.getContext("2d");
 
-export function draw(player, camera, spritePlayer, desenharMapa) {
+export function draw(player, camera, spritePlayer, desenharMapa, construcao) {
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -10,6 +10,23 @@ export function draw(player, camera, spritePlayer, desenharMapa) {
     ctx.translate(-camera.x, -camera.y);
 
     desenharMapa(ctx);
+
+    for (let i = 0; i < construcao.construidos.length; i++) {
+        switch (construcao.construidos[i].tipo) {
+            case 0:
+                ctx.fillStyle = "red";
+                break;
+        
+            case 2:
+                ctx.fillStyle = "green";
+                break;
+        
+            default:
+                ctx.fillStyle = "gray";
+                break;
+        }
+        ctx.fillRect(construcao.construidos[i].x, construcao.construidos[i].y, construcao.construidos[i].width, construcao.construidos[i].height);
+    }
 
     ctx.save();
 
@@ -27,7 +44,7 @@ export function draw(player, camera, spritePlayer, desenharMapa) {
         player.width,
         player.height
     );
-
+    
     ctx.restore();
     ctx.restore();
 }
