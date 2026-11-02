@@ -28,7 +28,7 @@ export function draw(player, camera, spritePlayer, desenharMapa, construcao) {
             case 3:
                 ctx.fillStyle = "orange";
                 break;
-                
+
             case 4:
                 ctx.fillStyle = "brown";
                 break;
@@ -39,6 +39,17 @@ export function draw(player, camera, spritePlayer, desenharMapa, construcao) {
         }
         ctx.fillRect(construcao.construidos[i].x, construcao.construidos[i].y, construcao.construidos[i].width, construcao.construidos[i].height);
     }
+
+    ctx.globalAlpha = 0.5;
+
+    ctx.fillRect(
+        construcao.previa.x,
+        construcao.previa.y,
+        construcao.previa.width,
+        construcao.previa.height
+    );
+
+    ctx.globalAlpha = 1;
 
     ctx.save();
 
