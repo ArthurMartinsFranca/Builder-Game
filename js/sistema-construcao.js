@@ -2,7 +2,7 @@ import {
     mouse
 }from "./input.js"
 
-let slots = document.querySelectorAll(".slots");
+let slots = document.querySelectorAll(".slot");
 
 export let construcao = {
     previa: {
@@ -32,6 +32,6 @@ window.addEventListener("click", function() {
     if (construcao.previa.tipo === null) {
         return;
     }
-    
+
 })
 
