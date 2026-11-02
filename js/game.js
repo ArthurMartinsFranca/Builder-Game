@@ -9,6 +9,11 @@ import {
     atualizarCamera 
 } from "./camera.js";
 
+import {
+    mouse,
+    teclas
+} from "./input.js"
+
 let canvas = document.querySelector("#canvas");
 let ctx = canvas.getContext("2d");
 
@@ -35,34 +40,7 @@ const player = {
     cor: 'brown'
 }
 
-const mouse = {
-    x: 0,
-    y: 0
-}
 
-const teclas = {
-    w: false,
-    a: false,
-    s: false,
-    d: false,
-}
-
-window.addEventListener("keydown", function(e) {
-    if (e.key in teclas )
-        teclas[e.key] = true;
-})
-
-window.addEventListener("keyup", function(e) {
-    if (e.key in teclas) 
-        teclas[e.key] = false;
-});
-
-window.addEventListener("mousemove", function(e) {
-    const rect = canvas.getBoundingClientRect();
-    
-    mouse.x = e.clientX - rect.left;
-    mouse.y = e.clientY - rect.top
-})
 
 function update() {
 
@@ -218,5 +196,3 @@ function loop() {
 }
 
 loop();
-
-
