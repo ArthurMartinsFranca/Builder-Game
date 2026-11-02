@@ -7,23 +7,32 @@ import{
 
 }from "./mapa.js" 
 
-window.onmousedown = function() { mouseClicado = true}
+export let mouseClicado;
 
-window.onmouseup = function() { mouseClicado = false}
+
 
 export const slotsRecursosEl = document.querySelectorAll('.slot-de-recurso');
 
-function pegarRecurso(auxX, auxY){
+window.onmousedown = function() { mouseClicado = true}
 
-    blocoAtual = MAPA[auxY][auxX];
+export function pegarRecurso(auxX, auxY){
+    
+    if (!MAPA || !MAPA[auxY] || MAPA[auxY][auxX] === undefined) return;
+
+    let blocoAtual = MAPA[auxY][auxX];
 
     if(mouseClicado === true){
         if(blocoAtual == 0){
-            slotsRecursosEl[0].style.backgroundImage = pedra.src;
+            slotsRecursosEl[0].style.backgroundImage =  "url('pedra.png')";
         }
 
         if(blocoAtual == 2){
-            slotsRecursosEl[0].style.backgroundImage = pedra.src;
+            slotsRecursosEl[0].style.backgroundImage = "url('arvore.png')";
         }
     }
+    
+    window.onmouseup = function() { mouseClicado = false}
+
+
 }
+
