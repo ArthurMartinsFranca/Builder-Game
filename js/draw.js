@@ -16,9 +16,21 @@ export function draw(player, camera, spritePlayer, desenharMapa, construcao) {
             case 0:
                 ctx.fillStyle = "red";
                 break;
+
+            case 1:
+                ctx.fillStyle = "blue";
+                break;
         
             case 2:
                 ctx.fillStyle = "green";
+                break;
+
+            case 3:
+                ctx.fillStyle = "orange";
+                break;
+                
+            case 4:
+                ctx.fillStyle = "brown";
                 break;
         
             default:
