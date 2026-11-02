@@ -1,3 +1,4 @@
+
 import {
     desenharMapa,
     MAPA,
@@ -29,13 +30,24 @@ import {
 import {
     construcao
 }from "./sistema-construcao.js"
+import { slotsRecursosEl } from "./pegar-recurso.js";
+
+import {
+    pegarRecurso,
+    mouseClicado
+}from "./pegar-recurso.js"
 
 
 redimensionarCanvas();
 
+
 window.addEventListener("resize", redimensionarCanvas);
 
+
 function update() {
+
+    let auxX;
+    let auxY;
 
     let bordaAlta = Math.floor((player.y) / TAMANHObLOCO);
 
@@ -56,10 +68,14 @@ function update() {
 
         if(MAPA[bordaAlta][colunaBordaEsquerda] === 0  || MAPA[bordaBaixa][colunaBordaEsquerda] === 0 ||
             MAPA[bordaAlta][colunaBordaEsquerda] === 2  || MAPA[bordaBaixa][colunaBordaEsquerda] === 2){
+                
+            player.x = (colunaBordaEsquerda * TAMANHObLOCO) + TAMANHObLOCO;  
 
-            player.x = (colunaBordaEsquerda * TAMANHObLOCO) + TAMANHObLOCO;
+            auxX = Math.floor((player.x - player.width)/TAMANHObLOCO);
+
+            auxY = Math.floor(player.y/TAMANHObLOCO);
+            
         }
-
     }
 
     if(teclas.d == true) {
@@ -75,11 +91,15 @@ function update() {
             MAPA[bordaAlta][colunaBordaDireita] === 2 || MAPA[bordaBaixa][colunaBordaDireita] === 2){
 
             player.x = (colunaBordaDireita * TAMANHObLOCO) - player.width;
+
+            auxX = Math.floor((player.x + player.width)/TAMANHObLOCO);
+
+            auxY = Math.floor(player.y/TAMANHObLOCO);
+           
         }
 
-
     }
-    if (
+ if (
         (teclas.a || teclas.d) &&
         colidiuComConstrucao(player.x, player.y)
     ) {
@@ -114,7 +134,6 @@ function update() {
         player.y = 0;
     }
 
-    
 
     if (teclas.w == true) {
 
@@ -128,7 +147,12 @@ function update() {
             MAPA[bordaAlta][colunaBordaDireita] === 2 || MAPA[bordaAlta][colunaBordaEsquerda] === 2){
 
             player.y = (bordaAlta * TAMANHObLOCO) + TAMANHObLOCO;
+
+            auxX = Math.floor((player.x/TAMANHObLOCO));
+
+            auxY = Math.floor((player.y - player.height)/TAMANHObLOCO);
         }
+
     }
 
     if (teclas.s == true) {
@@ -143,10 +167,14 @@ function update() {
             MAPA[bordaBaixa][colunaBordaDireita] === 2 || MAPA[bordaBaixa][colunaBordaEsquerda] === 2){
 
             player.y = (bordaBaixa * TAMANHObLOCO) - player.height;
+
+            auxX = Math.floor(player.x/TAMANHObLOCO);
+
+            auxY = Math.floor((player.y + player.height)/TAMANHObLOCO);
         }   
 
     }
-    
+        pegarRecurso(auxX, auxY);
 
     if (
         (teclas.w || teclas.s) &&
