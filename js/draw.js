@@ -10,53 +10,32 @@ export function draw(player, camera, spritePlayer, desenharMapa, construcao) {
     ctx.translate(-camera.x, -camera.y);
 
     desenharMapa(ctx);
-    if (construcao.previa.tipo !== null) {
-        for (let i = 0; i < construcao.construidos.length; i++) {
-            switch (construcao.construidos[i].tipo) {
-                case 0:
-                    ctx.fillStyle = "red";
-                    break;
 
-                case 1:
-                    ctx.fillStyle = "blue";
-                    break;
-
-                case 2:
-                    ctx.fillStyle = "green";
-                    break;
-
-                case 3:
-                    ctx.fillStyle = "orange";
-                    break;
-
-                case 4:
-                    ctx.fillStyle = "brown";
-                    break;
-
-                default:
-                    ctx.fillStyle = "gray";
-                    break;
-            }
-            ctx.fillRect(construcao.construidos[i].x, construcao.construidos[i].y, construcao.construidos[i].width, construcao.construidos[i].height);
-        }
-
-        ctx.globalAlpha = 0.5;
-
-        switch (construcao.previa.tipo) {
+    for (let i = 0; i < construcao.construidos.length; i++) {
+        let bloco = construcao.construidos[i];
+    
+        switch (bloco.tipo) {
             case 0: ctx.fillStyle = "red"; break;
             case 1: ctx.fillStyle = "blue"; break;
             case 2: ctx.fillStyle = "green"; break;
             case 3: ctx.fillStyle = "orange"; break;
             case 4: ctx.fillStyle = "brown"; break;
+            default: ctx.fillStyle = "gray"; break;
         }
-        
+    
+        ctx.fillRect(bloco.x, bloco.y, bloco.width, bloco.height);
+    }
+
+    if (construcao.previa.tipo !== null) {
+        ctx.globalAlpha = 0.5;
+    
         ctx.fillRect(
             construcao.previa.x,
             construcao.previa.y,
             construcao.previa.width,
             construcao.previa.height
         );
-
+    
         ctx.globalAlpha = 1;
     }
     ctx.save();
