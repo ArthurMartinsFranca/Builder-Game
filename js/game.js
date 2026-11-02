@@ -26,6 +26,10 @@ import {
     player
 }from "./player.js"
 
+import {
+    construcao
+}from "./sistema-construcao.js"
+
 
 redimensionarCanvas();
 
@@ -147,7 +151,7 @@ function update() {
 function loop() {
     update();
 
-    draw(player, camera, spritePlayer, desenharMapa);
+    draw(player, camera, spritePlayer, desenharMapa, construcao);
 
     requestAnimationFrame(loop);
 }
