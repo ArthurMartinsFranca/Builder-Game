@@ -14,33 +14,22 @@ import {
     teclas
 } from "./input.js"
 
-let canvas = document.querySelector("#canvas");
-let ctx = canvas.getContext("2d");
+import {
+    draw,
+    canvas,
+    ctx,
+    redimensionarCanvas
+}from "./draw.js"
 
-const spritePlayer = new Image();
-spritePlayer.src = "./sprites/player.png";
+import {
+    spritePlayer,
+    player
+}from "./player.js"
 
-function redimensionarCanvas() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-}
 
 redimensionarCanvas();
 
 window.addEventListener("resize", redimensionarCanvas);
-
-const player = {
-    x: 2000,
-    y: 2000,
-    width: 70,
-    height: 70,
-    vida: 100,
-    velocidade: 3,
-    angulo: 0,
-    cor: 'brown'
-}
-
-
 
 function update() {
 
@@ -155,42 +144,10 @@ function update() {
     atualizarCamera(player, canvas);
 }
 
-function draw() {
-
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    ctx.save();
-
-    ctx.translate(-camera.x, -camera.y);
-
-    desenharMapa(ctx);
-
-    ctx.save();
-
-    ctx.translate(player.x + player.width / 2,
-        player.y + player.height / 2
-    );
-
-    ctx.rotate(player.angulo);
-
-    ctx.fillStyle = player.cor;
-
-    ctx.drawImage(
-        spritePlayer,
-        -player.width / 2,
-        -player.height / 2,
-        player.width,
-        player.height
-    );
-
-    ctx.restore();
-    ctx.restore();
-}
-
 function loop() {
     update();
-    draw();
 
+    draw(player, camera, spritePlayer, desenharMapa);
 
     requestAnimationFrame(loop);
 }
