@@ -29,9 +29,17 @@ slots.forEach(function(slot, i) {
 });
 
 window.addEventListener("click", function() {
+    if (event.target !== document.querySelector("#canvas")) return;
+
     if (construcao.previa.tipo === null) {
         return;
     }
-
+    construcao.construidos.push({
+        x: construcao.previa.x,
+        y: construcao.previa.y,
+        width: 80,
+        height: 80,
+        tipo: construcao.previa.tipo
+    });
 })
 
