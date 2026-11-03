@@ -1,26 +1,7 @@
-
-import {
-    desenharMapa,
-    MAPA,
-    TAMANHObLOCO
-} from "./mapa.js";
-
-import { 
-    camera, 
-    atualizarCamera 
-} from "./camera.js";
-
-import {
-    mouse,
-    teclas
-} from "./input.js"
-
-import {
-    draw,
-    canvas,
-    ctx,
-    redimensionarCanvas
-}from "./draw.js"
+import {desenharMapa, MAPA, TAMANHObLOCO} from "./mapa.js";
+import { camera, atualizarCamera } from "./camera.js";
+import {mouse, teclas} from "./input.js"
+import {draw, canvas, ctx, redimensionarCanvas}from "./draw.js"
 
 import {
     spritePlayer,
@@ -30,16 +11,17 @@ import {
 import {
     construcao
 }from "./sistema-construcao.js"
-import { slotsRecursosEl } from "./pegar-recurso.js";
 
 import {
     pegarRecurso,
-    mouseClicado
+    mouseClicado,
 }from "./pegar-recurso.js"
 
+let i = 0;
+
+let contador1 = 0;
 
 redimensionarCanvas();
-
 
 window.addEventListener("resize", redimensionarCanvas);
 
