@@ -85,3 +85,21 @@ canvas {
     margin: 1px;
 
 }
+
+header {
+    display: flex;
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    z-index: 10;
+}
+
+#sair {
+    background-color: gray;
+    color: white;
+    border: none;
+    padding: 12px;
+    font-size: 25px;
+    cursor: pointer;
+    border-radius: 8px;
+}
