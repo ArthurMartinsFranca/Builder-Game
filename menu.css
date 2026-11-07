@@ -1,0 +1,62 @@
+body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image:linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(./sprites/fundo.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    font-family: Arial, sans-serif;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 35px;
+}
+
+header {
+    text-align: center;
+}
+
+header h1 {
+    color: white;
+    font-size: 60px;
+    margin: 0;
+}
+
+header h2 {
+    color: lightgray;
+    font-size: 18px;
+    font-weight: normal;
+}
+
+#jogar {
+    transition: all 200ms;
+    padding: 15px 60px;
+    font-size: 30px;
+    cursor: pointer;
+    border: none;
+    border-radius: 10px;
+}
+#jogar:hover {
+    animation: pulsar 1.5s infinite ease-in-out;
+}
+
+@keyframes pulsar {
+    0% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    50% {
+      transform: scale(1.1);
+      opacity: 0.7;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
