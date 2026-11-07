@@ -46,13 +46,16 @@ export function draw(player, camera, spritePlayer, desenharMapa, construcao) {
     );
 
     ctx.rotate(player.angulo);
+    
+    let largura = 70;
+    let altura = largura * (804 / 638);
 
     ctx.drawImage(
         spritePlayer,
         -player.width / 2,
         -player.height / 2,
-        player.width,
-        player.height
+        largura,
+        altura
     );
 
     ctx.restore();
