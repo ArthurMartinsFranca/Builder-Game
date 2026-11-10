@@ -189,7 +189,8 @@ function colidiuComConstrucao(x, y) {
             x < bloco.x + bloco.width &&
             x + player.width > bloco.x &&
             y < bloco.y + bloco.height &&
-            y + player.height > bloco.y
+            y + player.height > bloco.y &&
+            bloco.chao == false
         ) {
             return true;
         }
