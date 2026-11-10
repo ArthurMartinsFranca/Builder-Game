@@ -49,17 +49,13 @@ canvas {
 }
 
 .slot{
-
     width: 50px;
     height: 50px;
     border: solid 5px gold;
     margin: 1px;
     border-radius: 2px;
+}
 
-}
-.slot:hover {
-    background-color: gray;
-}
 
 #inventario-de-recursos{
 
@@ -102,4 +98,29 @@ header {
     font-size: 25px;
     cursor: pointer;
     border-radius: 8px;
+}
+
+#parede1 {
+    background-image: url("./sprites/fundoMadeira.png");
+    background-size: cover;
+}
+
+#parede2 {
+    background-image: url("./sprites/fundoTijolo.png");
+    background-size: cover;
+}
+
+#parede3 {
+    background-image: url("./sprites/fundoQuartzo.png");
+    background-size: cover;
+}
+
+#parede4 {
+    background-image: url("./sprites/fundoPedra.png");
+    background-size: cover;
+}
+
+#parede5 {
+    background-image: url("./sprites/fundoDecorativo.png");
+    background-size: cover;
 }
