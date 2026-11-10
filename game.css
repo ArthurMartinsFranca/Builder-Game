@@ -42,8 +42,8 @@ canvas {
     height: auto;
     position: fixed;
     bottom: 20px;
-    left: 20px;
-    right: auto;
+    left: 60px;
+    right: 2px;
     z-index: 10;
 
 }
@@ -106,12 +106,12 @@ header {
 }
 
 #parede2 {
-    background-image: url("./sprites/fundoTijolo.png");
+    background-image: url("./sprites/fundoQuartzo.png");
     background-size: cover;
 }
 
 #parede3 {
-    background-image: url("./sprites/fundoQuartzo.png");
+    background-image: url("./sprites/fundoTijolo.png");
     background-size: cover;
 }
 
