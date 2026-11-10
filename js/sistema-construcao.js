@@ -16,7 +16,7 @@ export let construcao = {
         y: 0,
         width: 80,
         height: 80,
-        tipo: null
+        tipo: null,
     },
 
     construidos: [],
@@ -89,8 +89,13 @@ window.addEventListener("click", function(event) {
         y: construcao.previa.y,
         width: 80,
         height: 80,
-        tipo: construcao.previa.tipo
+        tipo: construcao.previa.tipo,
+        chao: false
     };
+
+    if (bloco.tipo <= 1 && bloco.tipo >=0) {
+        bloco.chao = true;
+    }
     
     if (!podeConstruir(bloco)) return;
     if (!podeConstruirSemPlayer(bloco)) return;
