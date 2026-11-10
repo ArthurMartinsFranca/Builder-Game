@@ -1,3 +1,5 @@
+import { paredes } from "./paredes.js";
+
 export let canvas = document.querySelector("#canvas");
 export let ctx = canvas.getContext("2d");
 
@@ -14,30 +16,34 @@ export function draw(player, camera, spritePlayer, desenharMapa, construcao) {
     for (let i = 0; i < construcao.construidos.length; i++) {
         let bloco = construcao.construidos[i];
     
-        switch (bloco.tipo) {
-            case 0: ctx.fillStyle = "red"; break;
-            case 1: ctx.fillStyle = "blue"; break;
-            case 2: ctx.fillStyle = "green"; break;
-            case 3: ctx.fillStyle = "orange"; break;
-            case 4: ctx.fillStyle = "brown"; break;
-            default: ctx.fillStyle = "gray"; break;
-        }
-    
-        ctx.fillRect(bloco.x, bloco.y, bloco.width, bloco.height);
-    }
+        let sprite = paredes[bloco.tipo];
+
+        ctx.drawImage(
+            sprite,
+            bloco.x,
+            bloco.y,
+            bloco.width,
+            bloco.height
+        );
+
+    }  
 
     if (construcao.previa.tipo !== null) {
         ctx.globalAlpha = 0.5;
-    
-        ctx.fillRect(
+        
+        let sprite = paredes[construcao.previa.tipo];
+        
+        ctx.drawImage(
+            sprite,
             construcao.previa.x,
             construcao.previa.y,
             construcao.previa.width,
             construcao.previa.height
         );
-    
+        
         ctx.globalAlpha = 1;
-    }
+        }
+
     ctx.save();
 
     ctx.translate(
