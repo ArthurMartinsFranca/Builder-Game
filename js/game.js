@@ -27,9 +27,8 @@ window.addEventListener("resize", redimensionarCanvas);
 
 
 function update() {
-
-    let auxX;
-    let auxY;
+    
+   
 
     let bordaAlta = Math.floor((player.y) / TAMANHObLOCO);
 
@@ -53,10 +52,6 @@ function update() {
                 
             player.x = (colunaBordaEsquerda * TAMANHObLOCO) + TAMANHObLOCO;  
 
-            auxX = Math.floor((player.x - player.width)/TAMANHObLOCO);
-
-            auxY = Math.floor(player.y/TAMANHObLOCO);
-            
         }
     }
 
@@ -74,9 +69,7 @@ function update() {
 
             player.x = (colunaBordaDireita * TAMANHObLOCO) - player.width;
 
-            auxX = Math.floor((player.x + player.width)/TAMANHObLOCO);
-
-            auxY = Math.floor(player.y/TAMANHObLOCO);
+           
            
         }
 
@@ -130,9 +123,7 @@ function update() {
 
             player.y = (bordaAlta * TAMANHObLOCO) + TAMANHObLOCO;
 
-            auxX = Math.floor((player.x/TAMANHObLOCO));
-
-            auxY = Math.floor((player.y - player.height)/TAMANHObLOCO);
+            
         }
 
     }
@@ -150,13 +141,12 @@ function update() {
 
             player.y = (bordaBaixa * TAMANHObLOCO) - player.height;
 
-            auxX = Math.floor(player.x/TAMANHObLOCO);
-
-            auxY = Math.floor((player.y + player.height)/TAMANHObLOCO);
+            
         }   
 
     }
-        pegarRecurso(auxX, auxY);
+        pegarRecurso();
+    
 
     if (
         (teclas.w || teclas.s) &&
