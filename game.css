@@ -54,6 +54,7 @@ canvas {
     border: solid 5px gold;
     margin: 1px;
     border-radius: 2px;
+    position: relative;
 }
 
 
@@ -79,6 +80,7 @@ canvas {
     height: 50px;
     border: solid 5px blue;
     margin: 1px;
+    position: relative;
 
 }
 
@@ -124,3 +126,125 @@ header {
     background-image: url("./sprites/fundoDecorativo.png");
     background-size: cover;
 }
+
+[data-type="number1"] {
+    position: absolute;
+    width: 20px;
+    height: 10px;
+    bottom: 2px;
+    left: 2px;
+    font-size: 12px;
+    background-color: #00000000;
+    color: white;
+    display: inline;
+
+}
+
+[data-type="number2"] {
+    position: absolute;
+    width: 20px;
+    height: 10px;
+    bottom: 2px;
+    left: 2px;
+    font-size: 12px;
+    background-color: #00000000;
+    color: white;
+    display: inline;
+
+}
+
+[data-type="number3"] {
+    position: absolute;
+    width: 20px;
+    height: 10px;
+    bottom: 2px;
+    left: 2px;
+    font-size: 12px;
+    background-color: #00000000;
+    color: white;
+    display: inline;
+
+}
+
+[data-type="number4"] {
+    position: absolute;
+    width: 20px;
+    height: 10px;
+    bottom: 2px;
+    left: 2px;
+    font-size: 12px;
+    background-color: #00000000;
+    color: white;
+    display: inline;
+
+}
+
+[data-type="number5"] {
+    position: absolute;
+    width: 20px;
+    height: 10px;
+    bottom: 2px;
+    left: 2px;
+    font-size: 12px;
+    background-color: #00000000;
+    color: white;
+    display: inline;
+
+}
+
+[data-type="number6"] {
+    position: absolute;
+    width: 20px;
+    height: 10px;
+    bottom: 2px;
+    left: 2px;
+    font-size: 12px;
+    background-color: #00000000;
+    color: white;
+    display: inline;
+
+}
+
+[data-type="number7"] {
+    position: absolute;
+    width: 20px;
+    height: 10px;
+    bottom: 2px;
+    left: 2px;
+    font-size: 12px;
+    background-color: #00000000;
+    color: white;
+    display: inline;
+
+}
+
+[data-type="number3 text"]{
+    width: 60px;
+    position: absolute;
+    right: 1px;
+    left: -10px;
+    text-align: center;
+    font-size: 10px;
+    bottom: 50px;
+    color: white;
+    background-color: blue;
+
+}
+
+[data-type="number4 text"]{
+    width: 60px;
+    position: absolute;
+    right: 1px;
+    left: -10px;
+    text-align: center;
+    font-size: 10px;
+    bottom: 50px;
+    color: white;
+    background-color: red;
+
+}
+
+
+
+
+
