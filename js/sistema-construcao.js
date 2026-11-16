@@ -7,8 +7,15 @@ import {
     player
 }from "./player.js"
 
+import {
+    moveis,
+    dadosMoveis
+} from "./sprites.js"
+
 let slots = document.querySelectorAll(".slot");
+let itensMoveis = document.querySelectorAll("#painel-moveis img");
 let remover = false;
+
 
 export let construcao = {
     previa: {
@@ -20,7 +27,33 @@ export let construcao = {
     },
 
     construidos: [],
+
+    moveis: [],
+
+    moveisPrevia: {
+        x: 0,
+        y: 0,
+        width: null,
+        height: null,
+        tipo: null
+    }
 };
+
+itensMoveis.forEach((item, i) => {
+    item.addEventListener("click", () => {
+        if (construcao.moveisPrevia.tipo === i) {
+            construcao.moveisPrevia.tipo = null;
+        } else {
+            construcao.moveisPrevia.tipo = i;
+        }
+
+        construcao.moveisPrevia.width = dadosMoveis[i].largura;
+
+        construcao.moveisPrevia.height =
+            dadosMoveis[i].largura *
+            (moveis[i].naturalHeight / moveis[i].naturalWidth);
+    });
+});
 
 function podeConstruir(bloco) {
     let colunaInicial = Math.floor(bloco.x / TAMANHObLOCO);
@@ -80,6 +113,21 @@ window.addEventListener("click", function(event) {
 
         return;
     }
+    if (construcao.moveisPrevia.tipo !== null) {
+
+        let movel = {
+            x: construcao.moveisPrevia.x,
+            y: construcao.moveisPrevia.y,
+            width: construcao.moveisPrevia.width,
+            height: construcao.moveisPrevia.height,
+            tipo: construcao.moveisPrevia.tipo
+        };
+
+        if (!podeConstruirTudo(movel)) return;
+    
+        construcao.moveis.push(movel);
+        return
+    }
 
 
     if (construcao.previa.tipo === null) return;
@@ -93,12 +141,12 @@ window.addEventListener("click", function(event) {
         chao: false
     };
 
+
     if (bloco.tipo <= 1 && bloco.tipo >=0) {
         bloco.chao = true;
     }
     
-    if (!podeConstruir(bloco)) return;
-    if (!podeConstruirSemPlayer(bloco)) return;
+    if (!podeConstruirTudo(bloco)) return;
     
     construcao.construidos.push(bloco);
 });
@@ -112,6 +160,13 @@ function podeConstruirSemPlayer(bloco) {
     ) {
         return false;
     }
+
+    return true;
+}
+
+function podeConstruirTudo(bloco) {
+    if (!podeConstruir(bloco)) return false;
+    if (!podeConstruirSemPlayer(bloco)) return false;
 
     return true;
 }
