@@ -137,6 +137,3 @@ export function pegarRecurso(){
     }
     
 }
-
-
-
