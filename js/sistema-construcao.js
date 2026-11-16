@@ -246,4 +246,3 @@ function podeConstruirTudo(bloco) {
 
     return true;
 }
-
