@@ -17,6 +17,13 @@ import {
     mouseClicado,
 }from "./pegar-recurso.js"
 
+let botaoMoveis = document.querySelector("#moveis");
+let painelMoveis = document.querySelector("#painel-moveis");
+
+botaoMoveis.addEventListener("click", () => {
+    painelMoveis.classList.toggle("aberto");
+});
+
 let i = 0;
 
 let contador1 = 0;
@@ -171,6 +178,9 @@ function update() {
     construcao.previa.x = Math.floor(mouseMundoX / construcao.previa.width) * construcao.previa.width;
 
     construcao.previa.y = Math.floor(mouseMundoY / construcao.previa.width) * construcao.previa.width;
+
+    construcao.moveisPrevia.x = mouse.x + camera.x;
+    construcao.moveisPrevia.y = mouse.y + camera.y;
 }
 
 function colidiuComConstrucao(x, y) {
