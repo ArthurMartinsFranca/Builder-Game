@@ -13,8 +13,6 @@ export let numero1 = document.querySelector('[data-type="number1"]');
 
 export let numero2 = document.querySelector('[data-type="number2"]');
 
-
-
 let contador1 = 0;
 let contador2 = 0;
 
@@ -28,9 +26,12 @@ window.onmouseup = function() { mouseClicado = false}
 
 let vidasMAPA = MAPA.map(linha => linha.map(bloco => (bloco === 0 ?  30 : bloco === 2 ? 15 : 0)));
 let tempo_coleta = 0;
-const TEMPO_RECARGA = 500;
+const TEMPO_RECARGA = 200;
 
 export function pegarRecurso(){
+
+    let numero1aux = Number(numero1.textContent);
+    let numero2aux = Number(numero2.textContent)
 
     let agora = Date.now();
 
@@ -103,11 +104,11 @@ export function pegarRecurso(){
 
             }
             
-            if(numero1.textContent < 50){
+            if(numero1aux < 50){
 
-                contador1 += 1;
+                numero1aux++;
 
-                numero1.textContent = contador1;
+                numero1.textContent = numero1aux
 
                 tempo_coleta = agora;
             }
@@ -124,11 +125,11 @@ export function pegarRecurso(){
 
             }
             
-            if(numero2.textContent < 50){
+            if(numero2aux < 50){
 
-                contador2 += 1;
+                numero2aux++;
 
-                numero2.textContent = contador2;
+                numero2.textContent = numero2aux;
 
                 tempo_coleta = agora;
             }
@@ -136,4 +137,6 @@ export function pegarRecurso(){
     }
     
 }
+
+
 
