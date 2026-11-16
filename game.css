@@ -129,7 +129,6 @@ header {
 
 #moveis {
     position: fixed;
-
     width: 60px;
     height: 60px;
     left: 60px;
@@ -147,8 +146,8 @@ header {
     left: 60px;
     bottom: 130px;
 
-    background-color: lightblue;
-    border-radius: 10%;
+    background-color: rgb(95, 35, 35);
+    border-radius: 5px;
 
     overflow-y: auto;
     display: none;
@@ -257,14 +256,99 @@ header {
 
 }
 
+
+[data-type="number8"] {
+    width: 20px;
+    height: 40px;
+    bottom: 2px;
+    left: 50px;
+    font-size: 12px;
+    background-color: #00000000;
+    color: white;
+    display: inline;
+
+}
+
+[data-type="number9"] {
+    width: 20px;
+    height: 40px;
+    bottom: 2px;
+    left: 50px;
+    font-size: 12px;
+    background-color: #00000000;
+    color: white;
+    display: inline;
+
+}
+
+[data-type="number10"] {
+    width: 20px;
+    height: 40px;
+    bottom: 2px;
+    left: 50px;
+    font-size: 12px;
+    background-color: #00000000;
+    color: white;
+    display: inline;
+
+}
+
+[data-type="number11"] {
+    width: 20px;
+    height: 40px;
+    bottom: 2px;
+    left: 50px;
+    font-size: 12px;
+    background-color: #00000000;
+    color: white;
+    display: inline;
+
+}
+
+[data-type="number12"] {
+    width: 20px;
+    height: 40px;
+    bottom: 2px;
+    left: 50px;
+    font-size: 12px;
+    background-color: #00000000;
+    color: white;
+    display: inline;
+
+}
+
+[data-type="number13"] {
+    width: 20px;
+    height: 40px;
+    bottom: 2px;
+    left: 50px;
+    font-size: 12px;
+    background-color: #00000000;
+    color: white;
+    display: inline;
+
+}
+
+[data-type="number14"] {
+    width: 20px;
+    height: 40px;
+    bottom: 2px;
+    left: 50px;
+    font-size: 12px;
+    background-color: #00000000;
+    color: white;
+    display: inline;
+
+}
+
 [data-type="number3 text"]{
     width: 60px;
     position: absolute;
     right: 1px;
-    left: -10px;
+    left: -2px;
     text-align: center;
     font-size: 10px;
-    bottom: 50px;
+    bottom: 67px;
     color: white;
     background-color: blue;
 
@@ -274,10 +358,68 @@ header {
     width: 60px;
     position: absolute;
     right: 1px;
-    left: -10px;
+    left: -2px;
     text-align: center;
     font-size: 10px;
-    bottom: 50px;
+    bottom: 67px;
     color: white;
     background-color: red;
 }
+
+[data-type="number5 text"] {
+    width: 60px;
+    position: absolute;
+    right: 1px;
+    left: -2px;
+    text-align: center;
+    font-size: 10px;
+    bottom: 67px;
+    color: white;
+    background-color: green;
+}
+
+[data-type="number6 text"] {
+    width: 60px;
+    position: absolute;
+    right: 1px;
+    left: -2px;
+    text-align: center;
+    font-size: 10px;
+    bottom: 67px;
+    color: white;
+    background-color: brown;
+}
+
+[data-type="number7 text"] {
+    width: 60px;
+    position: absolute;
+    right: 1px;
+    left: -2px;
+    text-align: center;
+    font-size: 10px;
+    bottom: 67px;
+    color: white;
+    background-color: black;
+}
+
+[data-type="number8 text"] {
+    width: 60px;
+    position: absolute;
+    right: 1px;
+    left: -2px;
+    text-align: center;
+    font-size: 10px;
+    bottom: 67px;
+    color: white;
+    background-color: dar;
+}
+
+.precoMoveis{
+    text-align: left;
+    font-size: 14px;
+    color: rgb(0, 0, 0);
+    border-radius: 2px;
+}
+
+
+
