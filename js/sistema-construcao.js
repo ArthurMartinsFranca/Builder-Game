@@ -23,7 +23,7 @@ let vetorNumeros = [numero1, numero2];
 let remover = false;
 let quantidade = document.querySelectorAll('.qtd');
 let precoEl = document.querySelectorAll('.preco');
-let remover = false;
+
 
 
 export let construcao = {
@@ -87,20 +87,7 @@ function podeConstruir(bloco) {
     return true;
 }
 
-slots.forEach(function(slot, i) {
-    slot.addEventListener("click", function() {
-        remover = false;
-
-        if (construcao.previa.tipo === i) {
-            construcao.previa.tipo = null;
-        } else {
-            construcao.previa.tipo = i;
-        }
-    });
-});
-
 for(let i = 0; i < 5; i++){
-
     
     let preconumero = Number(precoEl[i].textContent.replace(/\D/g,''));
     let j = 0;
@@ -164,6 +151,7 @@ slots.forEach(function(slot, i) {
 document.querySelector("#remover").addEventListener("click", function() {
     remover = true;
     construcao.previa.tipo = null;
+    construcao.moveisPrevia.tipo = null;
 });
 
 window.addEventListener("click", function(event) {
@@ -258,3 +246,4 @@ function podeConstruirTudo(bloco) {
 
     return true;
 }
+
