@@ -1,4 +1,4 @@
-import { paredes } from "./paredes.js";
+import { paredes, moveis } from "./sprites.js";
 
 export let canvas = document.querySelector("#canvas");
 export let ctx = canvas.getContext("2d");
@@ -42,6 +42,34 @@ export function draw(player, camera, spritePlayer, desenharMapa, construcao) {
         );
         
         ctx.globalAlpha = 1;
+        }
+        if (construcao.moveisPrevia.tipo !== null) {
+            let sprite = moveis[construcao.moveisPrevia.tipo];
+        
+            ctx.globalAlpha = 0.5;
+            console.log("Desenhando móvel");
+        
+            ctx.drawImage(
+                sprite,
+                construcao.moveisPrevia.x,
+                construcao.moveisPrevia.y,
+                construcao.moveisPrevia.width,
+                construcao.moveisPrevia.height
+            );
+        
+            ctx.globalAlpha = 1;
+        }
+        for (let i = 0; i < construcao.moveis.length; i++) {
+            let movel = construcao.moveis[i];
+            let sprite = moveis[movel.tipo];
+        
+            ctx.drawImage(
+                sprite,
+                movel.x,
+                movel.y,
+                movel.width,
+                movel.height
+            );
         }
 
     ctx.save();
