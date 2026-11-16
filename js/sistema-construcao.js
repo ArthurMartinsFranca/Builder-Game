@@ -12,8 +12,17 @@ import {
     dadosMoveis
 } from "./sprites.js"
 
+import {
+    numero1,
+    numero2
+}from "./pegar-recurso.js"
+
 let slots = document.querySelectorAll(".slot");
 let itensMoveis = document.querySelectorAll("#painel-moveis img");
+let vetorNumeros = [numero1, numero2];
+let remover = false;
+let quantidade = document.querySelectorAll('.qtd');
+let precoEl = document.querySelectorAll('.preco');
 let remover = false;
 
 
@@ -90,6 +99,68 @@ slots.forEach(function(slot, i) {
     });
 });
 
+for(let i = 0; i < 5; i++){
+
+    
+    let preconumero = Number(precoEl[i].textContent.replace(/\D/g,''));
+    let j = 0;
+    let slot = slots[i];
+
+    slot.addEventListener("click", function(){
+
+        let qtdnumero = Number(quantidade[i].textContent);
+
+        if(precoEl[i].textContent.includes('MADEIRA') === true){
+
+            j = 1;
+
+        }
+
+        else{
+            j = 0;
+        }
+
+        let numero1nu = Number(vetorNumeros[j].textContent);
+
+        if(numero1nu >= preconumero){
+
+            qtdnumero += 5;
+
+            numero1nu -= preconumero;
+
+        }
+
+        vetorNumeros[j].textContent = numero1nu;
+
+        quantidade[i].textContent = qtdnumero;
+    });
+  
+}
+
+
+slots.forEach(function(slot, i) {
+
+    slot.addEventListener("click", function() {
+
+        let qtdnumero = Number(quantidade[i].textContent);
+
+        if(qtdnumero <= 0){
+            return;
+        }
+        
+        remover = false;
+
+        if (construcao.previa.tipo === i) {
+            construcao.previa.tipo = null;
+        } else {
+            construcao.previa.tipo = i;
+        }
+
+        
+    });
+});
+
+
 document.querySelector("#remover").addEventListener("click", function() {
     remover = true;
     construcao.previa.tipo = null;
@@ -132,6 +203,13 @@ window.addEventListener("click", function(event) {
 
     if (construcao.previa.tipo === null) return;
 
+    let qtdnumero = Number(quantidade[construcao.previa.tipo].textContent);
+
+    if(qtdnumero === 0){
+
+        return;
+    }
+
     let bloco = {
         x: construcao.previa.x,
         y: construcao.previa.y,
@@ -149,6 +227,16 @@ window.addEventListener("click", function(event) {
     if (!podeConstruirTudo(bloco)) return;
     
     construcao.construidos.push(bloco);
+
+    qtdnumero--;
+
+    if(qtdnumero <= 0){
+
+        qtdnumero = 0;
+    }
+
+    quantidade[construcao.previa.tipo].textContent = qtdnumero;
+    
 });
 
 function podeConstruirSemPlayer(bloco) {
