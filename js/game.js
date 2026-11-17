@@ -184,6 +184,7 @@ function update() {
 }
 
 function colidiuComConstrucao(x, y) {
+
     for (let bloco of construcao.construidos) {
         if (
             x < bloco.x + bloco.width &&
@@ -191,6 +192,17 @@ function colidiuComConstrucao(x, y) {
             y < bloco.y + bloco.height &&
             y + player.height > bloco.y &&
             bloco.chao == false
+        ) {
+            return true;
+        }
+    }
+
+    for (let movel of construcao.moveis) {
+        if (
+            x < movel.x + movel.width &&
+            x + player.width > movel.x &&
+            y < movel.y + movel.height &&
+            y + player.height > movel.y
         ) {
             return true;
         }
