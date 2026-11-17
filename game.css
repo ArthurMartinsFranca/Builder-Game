@@ -51,7 +51,7 @@ canvas {
 .slot{
     width: 70px;
     height: 70px;
-    border: solid 5px gold;
+    border: solid 3px #333;
     margin: 1px;
     border-radius: 2px;
     position: relative;
@@ -421,5 +421,29 @@ header {
     border-radius: 2px;
 }
 
+.comprar-bloco {
+    position: absolute;
+    border: 0;
+    padding: 2px;
+    border-radius: 10%;
+    margin-top: 60px;
+    left: -5px;
+    background-image: linear-gradient(45deg,gold, yellow, gold);
+}
 
+.comprar-bloco:hover {
+    left: -6px;
+    top: 2px;
+}
 
+.comprar-movel  {
+    background-image: linear-gradient(45deg,gold, yellow, gold);
+    padding: 2px;
+    border-radius: 10%;
+    border: 0;
+}
+
+.comprar-movel:hover {
+    
+    margin-left: 4px;
+}
