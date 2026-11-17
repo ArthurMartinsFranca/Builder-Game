@@ -17,14 +17,20 @@ import {
     numero2
 }from "./pegar-recurso.js"
 
-let slots = document.querySelectorAll(".slot");
-let itensMoveis = document.querySelectorAll("#painel-moveis img");
 let vetorNumeros = [numero1, numero2];
 let remover = false;
+
+let slots = document.querySelectorAll("#inventario .slot:not(#remover)");
+let itensMoveis = document.querySelectorAll("#painel-moveis img");
+
 let quantidade = document.querySelectorAll('.qtd');
 let precoEl = document.querySelectorAll('.preco');
 
+let precoMoveis = document.querySelectorAll("#painel-moveis .precoMoveis");
+let quantidadeMoveis = document.querySelectorAll("#painel-moveis [data-type]");
 
+let botoesCompraBlocos = document.querySelectorAll(".comprar-bloco");
+let botoesCompraMoveis = document.querySelectorAll(".comprar-movel");
 
 export let construcao = {
     previa: {
@@ -50,11 +56,17 @@ export let construcao = {
 
 itensMoveis.forEach((item, i) => {
     item.addEventListener("click", () => {
+
+        let qtd = Number(quantidadeMoveis[i].textContent);
+
+        if (qtd <= 0) return;
+
         if (construcao.moveisPrevia.tipo === i) {
             construcao.moveisPrevia.tipo = null;
-        } else {
-            construcao.moveisPrevia.tipo = i;
+            return;
         }
+
+        construcao.moveisPrevia.tipo = i;
 
         construcao.moveisPrevia.width = dadosMoveis[i].largura;
 
@@ -87,41 +99,51 @@ function podeConstruir(bloco) {
     return true;
 }
 
-for(let i = 0; i < 5; i++){
-    
-    let preconumero = Number(precoEl[i].textContent.replace(/\D/g,''));
-    let j = 0;
-    let slot = slots[i];
+for (let i = 0; i < 5; i++) {
 
-    slot.addEventListener("click", function(){
+    let preco = Number(precoEl[i].textContent.replace(/\D/g, ""));
 
-        let qtdnumero = Number(quantidade[i].textContent);
+    botoesCompraBlocos[i].addEventListener("click", function(event) {
 
-        if(precoEl[i].textContent.includes('MADEIRA') === true){
+        event.stopPropagation();
 
-            j = 1;
+        let j = precoEl[i].textContent.includes("MADEIRA") ? 1 : 0;
 
-        }
+        let recurso = Number(vetorNumeros[j].textContent);
 
-        else{
-            j = 0;
-        }
+        if (recurso < preco) return;
 
-        let numero1nu = Number(vetorNumeros[j].textContent);
+        let qtd = Number(quantidade[i].textContent);
 
-        if(numero1nu >= preconumero){
+        qtd += 5;
+        recurso -= preco;
 
-            qtdnumero += 5;
-
-            numero1nu -= preconumero;
-
-        }
-
-        vetorNumeros[j].textContent = numero1nu;
-
-        quantidade[i].textContent = qtdnumero;
+        quantidade[i].textContent = qtd;
+        vetorNumeros[j].textContent = recurso;
     });
-  
+}
+
+for (let i = 0; i < itensMoveis.length; i++) {
+
+    let preco = Number(precoMoveis[i].textContent.replace(/\D/g, ""));
+
+    botoesCompraMoveis[i].addEventListener("click", function(event) {
+
+        event.stopPropagation();
+
+        let j = precoMoveis[i].textContent.includes("MADEIRA") ? 1 : 0;
+
+        let recurso = Number(vetorNumeros[j].textContent);
+        let qtd = Number(quantidadeMoveis[i].textContent);
+
+        if (recurso < preco) return;
+
+        qtd++;
+        recurso -= preco;
+
+        vetorNumeros[j].textContent = recurso;
+        quantidadeMoveis[i].textContent = qtd;
+    });
 }
 
 
@@ -158,34 +180,69 @@ window.addEventListener("click", function(event) {
     if (event.target !== document.querySelector("#canvas")) return;
 
     if (remover) {
+
+        for (let i = 0; i < construcao.moveis.length; i++) {
+            let movel = construcao.moveis[i];
+    
+            if (
+                construcao.moveisPrevia.x >= movel.x &&
+                construcao.moveisPrevia.x <= movel.x + movel.width &&
+                construcao.moveisPrevia.y >= movel.y &&
+                construcao.moveisPrevia.y <= movel.y + movel.height
+            ) {
+                devolverRecursos(movel.tipo, true);
+                construcao.moveis.splice(i, 1);
+                return
+            }
+            
+        }
+    
         for (let i = 0; i < construcao.construidos.length; i++) {
             let bloco = construcao.construidos[i];
-
+    
             if (
                 construcao.previa.x === bloco.x &&
                 construcao.previa.y === bloco.y
             ) {
+                devolverRecursos(bloco.tipo);
                 construcao.construidos.splice(i, 1);
-                break;
+                return;
             }
+           
         }
-
+    
         return;
     }
+
     if (construcao.moveisPrevia.tipo !== null) {
 
+        let tipo = construcao.moveisPrevia.tipo;
+    
+        let qtd = Number(quantidadeMoveis[tipo].textContent);
+    
+        if (qtd <= 0) return;
+    
         let movel = {
             x: construcao.moveisPrevia.x,
             y: construcao.moveisPrevia.y,
             width: construcao.moveisPrevia.width,
             height: construcao.moveisPrevia.height,
-            tipo: construcao.moveisPrevia.tipo
+            tipo: tipo
         };
-
+    
         if (!podeConstruirTudo(movel)) return;
     
         construcao.moveis.push(movel);
-        return
+    
+        qtd--;
+    
+        quantidadeMoveis[tipo].textContent = qtd;
+    
+        if (qtd === 0) {
+            construcao.moveisPrevia.tipo = null;
+        }
+    
+        return;
     }
 
 
@@ -240,9 +297,57 @@ function podeConstruirSemPlayer(bloco) {
     return true;
 }
 
+function podeColocarMovel(movel) {
+
+    for (let i = 0; i < construcao.construidos.length; i++) {
+        let outroBloco = construcao.construidos[i];
+    
+        if (outroBloco.chao) continue;
+    
+        if (
+            movel.x < outroBloco.x + outroBloco.width &&
+            movel.x + movel.width > outroBloco.x &&
+            movel.y < outroBloco.y + outroBloco.height &&
+            movel.y + movel.height > outroBloco.y
+        ) {
+            return false;
+        }
+    }
+
+    for (let i = 0; i < construcao.moveis.length; i++) {
+        let outroMovel = construcao.moveis[i];
+    
+        if (
+            movel.x < outroMovel.x + outroMovel.width &&
+            movel.x + movel.width > outroMovel.x &&
+            movel.y < outroMovel.y + outroMovel.height &&
+            movel.y + movel.height > outroMovel.y
+        ) {
+            return false;
+        }
+    }
+    
+    return true;
+}
+
+function devolverRecursos(tipo, movel = false) {
+    let elemento = movel ? precoMoveis[tipo] : precoEl[tipo];
+
+    let preco = Number(elemento.textContent.replace(/\D/g, ""));
+    preco = Math.floor(preco / 5);
+    let madeira = elemento.textContent.includes("MADEIRA");
+
+    let recurso = madeira ? 1 : 0;
+
+    let atual = Number(vetorNumeros[recurso].textContent);
+
+    vetorNumeros[recurso].textContent = atual + preco;
+}
+
 function podeConstruirTudo(bloco) {
     if (!podeConstruir(bloco)) return false;
     if (!podeConstruirSemPlayer(bloco)) return false;
+    if (!podeColocarMovel(bloco)) return false;
 
     return true;
 }
