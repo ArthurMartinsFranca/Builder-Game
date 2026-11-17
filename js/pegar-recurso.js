@@ -101,7 +101,7 @@ export function pegarRecurso(){
 
             }
             
-            if(numero1aux < 50){
+            if(numero1aux < 999){
 
                 numero1aux++;
 
@@ -122,7 +122,7 @@ export function pegarRecurso(){
 
             }
             
-            if(numero2aux < 50){
+            if(numero2aux < 999){
 
                 numero2aux++;
 
