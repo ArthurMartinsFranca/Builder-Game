@@ -31,11 +31,11 @@ moveis[5].src = "./sprites/privada.png";
 moveis[6].src = "./sprites/sofa.png";
 
 export const dadosMoveis = [
-    { largura: 200 },
-    { largura: 150 },
-    { largura: 200 },
     { largura: 250 },
+    { largura: 200 },
     { largura: 150 },
-    { largura: 80 },
-    { largura: 250 }
+    { largura: 250 },
+    { largura: 300 },
+    { largura: 150 },
+    { largura: 130 }
 ];
