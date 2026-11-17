@@ -57,6 +57,15 @@ canvas {
     position: relative;
 }
 
+.slot:hover {
+    transform: scale(0.96);
+}
+
+#remover {
+    font-size: 50px;
+    background-image: linear-gradient(45deg, red, brown, red);
+}
+
 
 #inventario-de-recursos{
 
@@ -76,11 +85,12 @@ canvas {
 
 .slot-de-recurso{
 
-    width: 50px;
-    height: 50px;
-    border: solid 5px blue;
+    width: 70px;
+    height: 70px;
+    border: solid 3px #333;
     margin: 1px;
     position: relative;
+    background-color: #654321;
 
 }
 
@@ -146,7 +156,7 @@ header {
     left: 60px;
     bottom: 130px;
 
-    background-color: rgb(95, 35, 35);
+    background-image: linear-gradient(-45deg, #333, gray, #333);
     border-radius: 5px;
 
     overflow-y: auto;
@@ -345,12 +355,12 @@ header {
     width: 60px;
     position: absolute;
     right: 1px;
-    left: -2px;
+    left: 1px;
     text-align: center;
     font-size: 10px;
     bottom: 67px;
     color: white;
-    background-color: blue;
+    background-color: #333;
 
 }
 
@@ -358,55 +368,55 @@ header {
     width: 60px;
     position: absolute;
     right: 1px;
-    left: -2px;
+    left: 1px;
     text-align: center;
     font-size: 10px;
     bottom: 67px;
     color: white;
-    background-color: red;
+    background-color: #333;
 }
 
 [data-type="number5 text"] {
     width: 60px;
     position: absolute;
     right: 1px;
-    left: -2px;
+    left: 1px;
     text-align: center;
     font-size: 10px;
     bottom: 67px;
     color: white;
-    background-color: green;
+    background-color: #333;
 }
 
 [data-type="number6 text"] {
     width: 60px;
     position: absolute;
     right: 1px;
-    left: -2px;
+    left: 1px;
     text-align: center;
     font-size: 10px;
     bottom: 67px;
     color: white;
-    background-color: brown;
+    background-color: #333;
 }
 
 [data-type="number7 text"] {
     width: 60px;
     position: absolute;
     right: 1px;
-    left: -2px;
+    left: 1px;
     text-align: center;
     font-size: 10px;
     bottom: 67px;
     color: white;
-    background-color: black;
+    background-color: #333;
 }
 
 [data-type="number8 text"] {
     width: 60px;
     position: absolute;
     right: 1px;
-    left: -2px;
+    left: 1px;
     text-align: center;
     font-size: 10px;
     bottom: 67px;
@@ -427,7 +437,7 @@ header {
     padding: 2px;
     border-radius: 10%;
     margin-top: 60px;
-    left: -5px;
+    left: -0.5px;
     background-image: linear-gradient(45deg,gold, yellow, gold);
 }
 
@@ -443,7 +453,8 @@ header {
     border: 0;
 }
 
-.comprar-movel:hover {
-    
+.comprar-movel:hover {  
     margin-left: 4px;
 }
+
+
