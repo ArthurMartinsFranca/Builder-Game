@@ -13,9 +13,6 @@ export let numero1 = document.querySelector('[data-type="number1"]');
 
 export let numero2 = document.querySelector('[data-type="number2"]');
 
-let contador1 = 0;
-let contador2 = 0;
-
 export let mouseClicado;
 
 export const slotsRecursosEl = document.querySelectorAll('.slot-de-recurso');
@@ -24,7 +21,7 @@ window.onmousedown = function() { mouseClicado = true}
 
 window.onmouseup = function() { mouseClicado = false}
 
-let vidasMAPA = MAPA.map(linha => linha.map(bloco => (bloco === 0 ?  30 : bloco === 2 ? 15 : 0)));
+let vidasMAPA = MAPA.map(linha => linha.map(bloco => (bloco === 0 ?  50 : bloco === 2 ? 50 : 0)));
 let tempo_coleta = 0;
 const TEMPO_RECARGA = 200;
 
@@ -94,7 +91,7 @@ export function pegarRecurso(){
         let blocoAtual = MAPA[auxY][auxX];
 
         if(blocoAtual == 0){
-            slotsRecursosEl[0].style.backgroundImage = "url('./sprites/pedra.png')";
+            slotsRecursosEl[0].style.backgroundImage = "url('./sprites/fundopedra.png')";
 
             vidasMAPA[auxY][auxX] -= 1 ;
 
